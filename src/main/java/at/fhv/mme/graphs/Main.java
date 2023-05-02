@@ -17,6 +17,8 @@ public class Main {
 
             // traverse
             graph.traverse("A", TraversalAlgorithm.DFS_RECURSIVE);
+            graph.traverse("A", TraversalAlgorithm.DFS_ITERATIVE);
+            graph.traverse("A", TraversalAlgorithm.BFS_ITERATIVE);
         } catch (IOException e) {
             System.err.println("Error while reading file: " + e.getMessage());
         } catch (EmptyFileException | InvalidFileFormatException | NodeNotFoundException | NodeAlreadyExistsException e) {

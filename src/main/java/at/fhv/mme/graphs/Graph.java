@@ -14,10 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Graph {
     private final AdjacencyStructure adjStructure;
@@ -119,10 +116,24 @@ public class Graph {
         }
     }
 
-    private void depthFirstSearchIterative(Node startNode) {
+    private void depthFirstSearchIterative(Node startNode) throws NodeNotFoundException {
+        Set<Node> visited = new HashSet<>();
+        Stack<Node> stack = new Stack<>();
+        stack.push(startNode);
 
-        // TODO
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
 
+            if (!visited.contains(current)) {
+                System.out.println("Visiting: " + current.getName());
+                visited.add(current);
+
+                LinkedList<Node> neighbours = adjStructure.getNeighbours(current.getName());
+                for (Node neighbour : neighbours) {
+                    stack.push(neighbour);
+                }
+            }
+        }
     }
 
     private void breadthFirstSearchIterative(Node startNode) {
