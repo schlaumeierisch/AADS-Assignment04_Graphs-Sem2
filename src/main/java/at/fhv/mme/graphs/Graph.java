@@ -110,7 +110,7 @@ public class Graph {
         System.out.println("Visiting: " + node.getName());
         visited.add(node);
 
-        LinkedList<Node> neighbours = adjStructure.getNeighbours(node.getName());
+        LinkedList<Node> neighbours = this.adjStructure.getNeighbours(node.getName());
         for (Node neighbour : neighbours) {
             depthFirstSearchRecursive(neighbour, visited);
         }
@@ -128,7 +128,7 @@ public class Graph {
                 System.out.println("Visiting: " + current.getName());
                 visited.add(current);
 
-                LinkedList<Node> neighbours = adjStructure.getNeighbours(current.getName());
+                LinkedList<Node> neighbours = this.adjStructure.getNeighbours(current.getName());
                 for (Node neighbour : neighbours) {
                     stack.push(neighbour);
                 }
@@ -136,10 +136,22 @@ public class Graph {
         }
     }
 
-    private void breadthFirstSearchIterative(Node startNode) {
+    private void breadthFirstSearchIterative(Node startNode) throws NodeNotFoundException {
+        Set<Node> visited = new HashSet<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(startNode);
 
-        // TODO
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
 
+            if (!visited.contains(current)) {
+                System.out.println("Visiting: " + current.getName());
+                visited.add(current);
+
+                LinkedList<Node> neighbours = this.adjStructure.getNeighbours(current.getName());
+                queue.addAll(neighbours);
+            }
+        }
     }
 
     public void print() {
