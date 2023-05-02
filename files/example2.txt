@@ -1,0 +1,9 @@
+A, B, Otto, X
+A, B, 12
+A, Otto, 42
+A, X, 26
+B, A, 77
+Otto, A, 100
+Otto, X, 120
+X, A, 5
+X, B, 62

@@ -27,6 +27,18 @@ public class ObjectGraph implements AdjacencyStructure {
     }
 
     @Override
+    public Node getNode(String nodeName) throws NodeNotFoundException {
+        Node node = this.nodes.get(nodeName);
+
+        // check if node exists
+        if (node == null) {
+            throw new NodeNotFoundException("Node with name '" + nodeName + "' not found.");
+        }
+
+        return node;
+    }
+
+    @Override
     public void addEdge(String firstNodeName, String secondNodeName, int weight) throws NodeNotFoundException {
         Node firstNode = getNode(firstNodeName);
         Node secondNode = getNode(secondNodeName);
@@ -50,15 +62,5 @@ public class ObjectGraph implements AdjacencyStructure {
         }
 
         return neighbours;
-    }
-
-    private Node getNode(String nodeName) throws NodeNotFoundException {
-        Node node = this.nodes.get(nodeName);
-
-        if (node == null) {
-            throw new NodeNotFoundException("Node with name '" + nodeName + "' not found.");
-        }
-
-        return node;
     }
 }

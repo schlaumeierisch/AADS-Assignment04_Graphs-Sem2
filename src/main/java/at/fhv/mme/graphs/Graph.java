@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Graph {
     private final AdjacencyStructure adjStructure;
@@ -81,12 +83,52 @@ public class Graph {
         this.adjStructure.addNode(name);
     }
 
+    public Node getNode(String nodeName) throws NodeNotFoundException {
+        return this.adjStructure.getNode(nodeName);
+    }
+
     public void addEdge(String firstNode, String secondNode, int weight) throws NodeNotFoundException {
         this.adjStructure.addEdge(firstNode, secondNode, weight);
     }
 
     public LinkedList<Node> getNeighbours(String nodeName) throws NodeNotFoundException {
         return this.adjStructure.getNeighbours(nodeName);
+    }
+
+    public void traverse(String startNodeName, TraversalAlgorithm algorithm) throws NodeNotFoundException {
+        Node node = getNode(startNodeName);
+
+        switch (algorithm) {
+            case DFS_RECURSIVE -> depthFirstSearchRecursive(node, new HashSet<>());
+            case DFS_ITERATIVE -> depthFirstSearchIterative(node);
+            case BFS_ITERATIVE -> breadthFirstSearchIterative(node);
+        }
+    }
+
+    private void depthFirstSearchRecursive(Node node, Set<Node> visited) throws NodeNotFoundException {
+        if (visited.contains(node)) {
+            return;
+        }
+
+        System.out.println("Visiting: " + node.getName());
+        visited.add(node);
+
+        LinkedList<Node> neighbours = adjStructure.getNeighbours(node.getName());
+        for (Node neighbour : neighbours) {
+            depthFirstSearchRecursive(neighbour, visited);
+        }
+    }
+
+    private void depthFirstSearchIterative(Node startNode) {
+
+        // TODO
+
+    }
+
+    private void breadthFirstSearchIterative(Node startNode) {
+
+        // TODO
+
     }
 
     public void print() {

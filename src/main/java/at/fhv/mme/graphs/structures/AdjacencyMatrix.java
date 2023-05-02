@@ -43,18 +43,21 @@ public class AdjacencyMatrix implements AdjacencyStructure {
     }
 
     @Override
+    public Node getNode(String nodeName) throws NodeNotFoundException {
+        Node node = this.nodes.get(nodeName);
+
+        // check if node exists
+        if (node == null) {
+            throw new NodeNotFoundException("Node with name '" + nodeName + "' not found.");
+        }
+
+        return node;
+    }
+
+    @Override
     public void addEdge(String firstNodeName, String secondNodeName, int weight) throws NodeNotFoundException {
-        Node firstNode = this.nodes.get(firstNodeName);
-        Node secondNode = this.nodes.get(secondNodeName);
-
-        // check if nodes exist
-        if (firstNode == null) {
-            throw new NodeNotFoundException("Node with name '" + firstNodeName + "' not found.");
-        }
-
-        if (secondNode == null) {
-            throw new NodeNotFoundException("Node with name '" + secondNodeName + "' not found.");
-        }
+        Node firstNode = getNode(firstNodeName);
+        Node secondNode = getNode(secondNodeName);
 
         int firstNodeIndex = this.nodeIndices.get(firstNodeName);
         int secondNodeIndex = this.nodeIndices.get(secondNodeName);

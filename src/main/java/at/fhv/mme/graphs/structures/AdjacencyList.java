@@ -30,6 +30,18 @@ public class AdjacencyList implements AdjacencyStructure {
     }
 
     @Override
+    public Node getNode(String nodeName) throws NodeNotFoundException {
+        Node node = this.nodes.get(nodeName);
+
+        // check if node exists
+        if (node == null) {
+            throw new NodeNotFoundException("Node with name '" + nodeName + "' not found.");
+        }
+
+        return node;
+    }
+
+    @Override
     public void addEdge(String firstNodeName, String secondNodeName, int weight) throws NodeNotFoundException {
         Node firstNode = this.nodes.get(firstNodeName);
         Node secondNode = this.nodes.get(secondNodeName);
