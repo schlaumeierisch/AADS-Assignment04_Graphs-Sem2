@@ -79,24 +79,24 @@ public class Graph {
         return graph;
     }
 
-    public void addNode(String name) throws NodeAlreadyExistsException {
-        this.adjStructure.addNode(name);
+    public void addNode(String nodeName) throws NodeAlreadyExistsException {
+        this.adjStructure.addNode(nodeName);
     }
 
     public Node getNode(String nodeName) throws NodeNotFoundException {
         return this.adjStructure.getNode(nodeName);
     }
 
-    public void addEdge(String firstNode, String secondNode, int weight) throws NodeNotFoundException {
-        this.adjStructure.addEdge(firstNode, secondNode, weight);
+    public void addEdge(String firstNodeName, String secondNodeName, int weight) throws NodeNotFoundException {
+        this.adjStructure.addEdge(firstNodeName, secondNodeName, weight);
     }
 
     public LinkedList<Node> getNeighbours(String nodeName) throws NodeNotFoundException {
         return this.adjStructure.getNeighbours(nodeName);
     }
 
-    public void traverse(String startNodeName, TraversalAlgorithm algorithm) throws NodeNotFoundException {
-        Node node = getNode(startNodeName);
+    public void traverse(String nodeName, TraversalAlgorithm algorithm) throws NodeNotFoundException {
+        Node node = getNode(nodeName);
 
         switch (algorithm) {
             case DFS_RECURSIVE -> depthFirstSearchRecursive(node, new HashSet<>());

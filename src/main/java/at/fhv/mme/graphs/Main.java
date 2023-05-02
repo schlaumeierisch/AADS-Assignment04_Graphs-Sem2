@@ -10,10 +10,13 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
-            Graph graph = Graph.load("files/example1.txt", GraphType.ADJACENCY_LIST);
+            Graph graph = Graph.load("files/example2.txt", GraphType.ADJACENCY_LIST);
 
             // print structure
             graph.print();
+
+            // traverse
+            graph.traverse("A", TraversalAlgorithm.DFS_RECURSIVE);
         } catch (IOException e) {
             System.err.println("Error while reading file: " + e.getMessage());
         } catch (EmptyFileException | InvalidFileFormatException | NodeNotFoundException | NodeAlreadyExistsException e) {
